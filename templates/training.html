@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if engineer %}
+<h2>Инженерные тренажеры</h2>
+{%else%}
+<h2> Научные симуляторы</h2>
+{%endif%}
+{% endblock %}

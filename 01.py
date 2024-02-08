@@ -40,5 +40,15 @@ def login():
     return render_template('login.html', title='Авторизация', form=form)
 
 
+@app.route('/training/<prof>')
+def training(prof):
+    param = {
+        'title': prof
+    }
+    param[
+        'engineer'] = True if 'инженер' in prof or "строитель" in prof else False
+    return render_template('training.html', **param)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
