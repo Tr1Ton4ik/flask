@@ -7,8 +7,8 @@ promo_list = ('Человечество вырастает из детства.'
               '', 'Присоединяйся!')
 
 
-@app.route('/choice/<planet_name>')
-def promotion_image(planet_name):
+@app.route('/results/<nickname>/<int:level>/<float:rating>')
+def promotion_image(nickname, level, rating):
     return f'''<!doctype html>
                 <html lang="en">
                   <head>
@@ -20,22 +20,17 @@ def promotion_image(planet_name):
                     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
                     
                     crossorigin="anonymous">
-                    <title>Варианты выбора</title>
+                    <title>Результаты</title>
                   </head>
                   <body>
-                    <h1>Моё предложение: {planet_name}</h1>
-                      <h2>Эта планета близка к Земле;</h2>
+                    <h1>Результаты отбора</h1>
+                      <h2>Прентендент на участие в миссии:{nickname}</h2>
                     <div class="alert alert-success" role="alert">
-                      На ней много необходимых ресурсов;
+                      Поздравляем! Ваш рейтинг после {str(level)} этапа отбора
                     </div>
-                    <div class="alert alert-secondary" role="alert">
-                      На ней есть вода и атмосфера;
-                    </div>
+                    <p>составляет {str(rating)} баллов!</p>
                     <div class="alert alert-warning" role="alert">
-                      На ней есть небольшое магнитное поле;
-                    </div>
-                    <div class="alert alert-danger" role="alert">
-                      Наконец, она просто красива!
+                      Желаю удачи;
                     </div>
                   </body>
                 </html>'''
