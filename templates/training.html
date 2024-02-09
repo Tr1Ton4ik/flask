@@ -3,9 +3,9 @@
 {% block content %}
 {% if engineer %}
 <h2>Инженерные тренажеры</h2>
-<img src="{{ url_for('static', filename='img/shattle1.jpg') }}" width="400" height="500">
+<img src="{{ url_for('static', filename='img/shuttle1.jpg') }}" width="400" height="500">
 {%else%}
 <h2> Научные симуляторы</h2>
-<img src="static/img/shattle2.jpg" width="400" height="500">
+<img src="{{ url_for('static', filename='img/shuttle2.jpg') }}" width="400" height="500">
 {%endif%}
 {% endblock %}
