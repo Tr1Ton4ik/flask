@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% set profs = ('механик','инженер','я','биолог')%}
 {% if list_type not in ('ol', 'ul') %}
 <div class="alert alert-danger" role="alert">
                       неправильный тип списка
@@ -10,10 +9,10 @@
                       введите в поисковом запросе ol или ul после list_prof/
                     </div>
 {% else %}
-{% for prof in profs%}
 <{{list_type}}>
-<li>{{prof}}</li>
-</{{list_type}}>
+{% for prof in profs%}
+    <li>{{prof}}</li>
 {% endfor %}
+</{{list_type}}>
 {% endif %}
 {% endblock %}

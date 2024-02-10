@@ -12,7 +12,9 @@ def index(title):
 
 @app.route('/list_prof/<list_type>')
 def list_prof(list_type):
-    return render_template('professions_list.html', title='Список профессий',list_type=list_type)
+    params = {'title': 'Список профессий', 'list_type': list_type,
+              'profs': ['механик', 'инженер', 'я', 'биолог']}
+    return render_template('professions_list.html', **params)
 
 
 @app.route('/training/<prof>')
