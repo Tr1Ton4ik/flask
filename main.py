@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
+
+from loginform import LoginForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -19,12 +21,11 @@ def list_prof(list_type):
 
 @app.route('/training/<prof>')
 def training(prof):
-    param = {
-        'title': prof
+    params = {
+        'title': prof,
+        'engineer': True if 'инженер' in prof or "строитель" in prof else False
     }
-    param[
-        'engineer'] = True if 'инженер' in prof or "строитель" in prof else False
-    return render_template('training.html', **param)
+    return render_template('training.html', **params)
 
 
 @app.route('/answer')
@@ -39,6 +40,14 @@ def answers():
               'motivation': 'Первый трубадур на марсе',
               'ready': 'True'}
     return render_template('auto_answer.html', **params)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect('/success')
+    return render_template('login.html', title='Аварийный доступ', form=form)
 
 
 if __name__ == '__main__':
