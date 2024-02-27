@@ -1,27 +1,26 @@
 import datetime
 import sqlalchemy
+from sqlalchemy import orm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from .db_session import SqlAlchemyBase
-from sqlalchemy import orm
 
 
 class User(SqlAlchemyBase):
     __tablename__ = 'users'
 
-    id = sqlalchemy.Column(sqlalchemy.Integer,
-                           primary_key=True, autoincrement=True)
-    name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    about = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    email = sqlalchemy.Column(sqlalchemy.String,
-                              index=True, unique=True, nullable=False)
-    hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    created_date = sqlalchemy.Column(sqlalchemy.DateTime,
-                                     default=datetime.datetime.now)
-    news = orm.relationship("News", back_populates='user')
-
-    def __repr__(self):
-        return f'<User> {self.id} {self.name} {self.email}'
+    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True,
+                           autoincrement=True)
+    surname = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    name = sqlalchemy.Column(sqlalchemy.String)
+    age = sqlalchemy.Column(sqlalchemy.Integer)
+    position = sqlalchemy.Column(sqlalchemy.String)
+    speciality = sqlalchemy.Column(sqlalchemy.String)
+    address = sqlalchemy.Column(sqlalchemy.String)
+    email = sqlalchemy.Column(sqlalchemy.String, unique=True)
+    hashed_password = sqlalchemy.Column(sqlalchemy.String)
+    modified_date = sqlalchemy.Column(sqlalchemy.DateTime,
+                                      default=datetime.datetime.now())
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
