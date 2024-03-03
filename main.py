@@ -34,6 +34,7 @@ def index():
 
 
 @app.route('/addjob', methods=['Get', 'Post'])
+@login_required
 def add_job():
     form = JobsForm()
     if form.validate_on_submit():
