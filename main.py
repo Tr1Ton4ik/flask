@@ -39,14 +39,13 @@ def add_job():
     form = JobsForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
-        jobs = Jobs()
-        jobs.title = form.title.data
-        jobs.team_leader = form.team_leader.data
-        jobs.work_size = form.work_size.data
-        jobs.collaborators = form.collaborators.data
-        jobs.is_finished = form.is_finished.data
-        current_user.jobs.append(jobs)
-        db_sess.merge(current_user)
+        job = Jobs()
+        job.title = form.title.data
+        job.team_leader = form.team_leader.data
+        job.work_size = form.work_size.data
+        job.collaborators = form.collaborators.data
+        job.is_finished = form.is_finished.data
+        db_sess.add(job)
         db_sess.commit()
         return redirect('/')
     return render_template('jobs.html', title='Adding job',
